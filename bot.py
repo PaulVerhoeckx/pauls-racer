@@ -6,14 +6,14 @@ from ...bot import Bot
 from ...linear_math import Transform
 
 
-class SimpleBot(Bot):
+class PaulBot(Bot):
     @property
     def name(self):
-        return "SimpleBot"
+        return "ReverseEngineer"
 
     @property
     def contributor(self):
-        return "Nobleo"
+        return "Paul"
 
     def compute_commands(self, next_waypoint: int, position: Transform, velocity: Vector2) -> Tuple:
         target = self.track.lines[next_waypoint]
@@ -25,12 +25,12 @@ class SimpleBot(Bot):
         # calculate the throttle
         target_velocity = 50
         if velocity.length() < target_velocity:
-            throttle = 1
-        else:
             throttle = -1
+        else:
+            throttle = 1
 
         # calculate the steering
         if angle > 0:
-            return throttle, 1
-        else:
             return throttle, -1
+        else:
+            return throttle, 1
